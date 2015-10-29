@@ -28,25 +28,53 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Yii 2 Learning Workshop',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => Yii::t('common', 'Home'), 'url' => ['/site/index']],
+        ['label' => Yii::t('frontend', 'About'), 'url' => ['/site/about']],
+        ['label' => Yii::t('frontend', 'Contact'), 'url' => ['/site/contact']],
+        ['label' => Yii::t('frontend', 'Workshops'), 'items' => [
+          ['label' => 'Create Form', 'url' => '#'],
+          ['label' => 'Uploads', 'url' => '#'],
+          ['label' => 'Dependent Dropdown', 'url' => '#'],
+          ['label' => 'Relations', 'url' => '#'],
+          ['label' => 'PJax', 'url' => '#'],
+          ['label' => 'Filter & Sort in GirdView', 'url' => '#'],
+          ['label' => 'One From Multiple Model', 'url' => '#'],
+          ['label' => 'Collecting tabular input (Multiple Records)', 'url' => '#'],
+        ]]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+
+      $menuItems[] = [
+                      'label'=>Yii::t('common', 'Language'),
+                      'items'=>array_map(function ($code) {
+                          return [
+                              'label' => Yii::$app->params['availableLocales'][$code],
+                              'url' => ['/site/set-locale', 'locale'=>$code],
+                              'active' => Yii::$app->language === $code
+                          ];
+                      }, array_keys(Yii::$app->params['availableLocales']))
+                  ];
+
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
+          'label' => Yii::t('common', 'Account ({username})',['username'=>Yii::$app->user->identity->username]),
+          'items'=>[
+              ['label' => Yii::t('common', 'Settings'), 'url' => ['/profile/index']],
+              [
+                 'label' => Yii::t('common', 'Logout ({username})',['username'=>Yii::$app->user->identity->username]),
+                 'url' => ['/site/logout'],
+                 'linkOptions' => ['data-method' => 'post']
+             ]
+          ]
         ];
     }
     echo Nav::widget([
