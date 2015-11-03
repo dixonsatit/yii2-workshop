@@ -17,7 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Workshops' => 'ตัวอย่าง Workshops',
+    'You have successfully created your Yii-powered application.' => 'คุณได้สร้างแอบพลิเคชันสำเร็จแล้ว โดยใช้ Yii เป็นตัวขับเคลื่อน',
     'About' => 'เกี่ยวกับ',
+    'Congratulations' => 'ขอแสดงความยินดี',
     'Contact' => 'ติดต่อเรา',
+    'Workshops' => 'ตัวอย่าง Workshops',
 ];

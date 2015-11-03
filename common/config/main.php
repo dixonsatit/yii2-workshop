@@ -1,6 +1,10 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'as locale' => [
+        'class' => 'common\components\LocaleBehavior',
+        'enablePreferredLanguage' => true
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -10,10 +14,6 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'app*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/messages',
-                ],
                 'frontend*' => [
                   'class' => 'yii\i18n\PhpMessageSource',
                   'basePath' => '@common/messages',
