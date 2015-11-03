@@ -49,21 +49,22 @@ AppAsset::register($this);
           ['label' => 'Collecting tabular input (Multiple Records)', 'url' => '#'],
         ]]
     ];
+    $menuItems[] = [
+                    'label'=>Yii::t('common', 'Language'),
+                    'items'=>array_map(function ($code) {
+                        return [
+                            'label' => Yii::$app->params['availableLocales'][$code],
+                            'url' => ['/site/set-locale', 'locale'=>$code],
+                            'active' => Yii::$app->language === $code
+                        ];
+                    }, array_keys(Yii::$app->params['availableLocales']))
+                ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
 
-      $menuItems[] = [
-                      'label'=>Yii::t('common', 'Language'),
-                      'items'=>array_map(function ($code) {
-                          return [
-                              'label' => Yii::$app->params['availableLocales'][$code],
-                              'url' => ['/site/set-locale', 'locale'=>$code],
-                              'active' => Yii::$app->language === $code
-                          ];
-                      }, array_keys(Yii::$app->params['availableLocales']))
-                  ];
+
 
         $menuItems[] = [
           'label' => Yii::t('common', 'Account ({username})',['username'=>Yii::$app->user->identity->username]),
