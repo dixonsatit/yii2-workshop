@@ -42,8 +42,8 @@ class LocaleBehavior extends Behavior
             $userLocale = Yii::$app->getRequest()->getCookies()->getValue($this->cookieName);
         } else {
             $userLocale = Yii::$app->language;
-            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->profile->locale) {
-                $userLocale = Yii::$app->user->getIdentity()->profile->locale;
+            if (!Yii::$app->user->isGuest && isset(Yii::$app->user->identity->profile)) {
+                $userLocale = isset(Yii::$app->user->getIdentity()->profile->locale) ? Yii::$app->user->getIdentity()->profile->locale : 'en';
             } elseif ($this->enablePreferredLanguage) {
                 $userLocale = Yii::$app->request->getPreferredLanguage($this->getAvailableLocales());
             }

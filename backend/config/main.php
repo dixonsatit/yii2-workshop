@@ -11,10 +11,19 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    // 'as locale' => [
+    //     'class' => 'common\components\LocaleBehavior',
+    //     'enablePreferredLanguage' => true
+    // ],
+    'modules' => [
+      'customauth' => [
+            'class' => 'common\modules\customauth\Module',
+        ],
+    ],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modules\customauth\models\Employee',
+            //'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
         'log' => [

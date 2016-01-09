@@ -35,17 +35,34 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => Yii::t('common', 'Home'), 'url' => ['/site/index']],
-        ['label' => Yii::t('backend', 'Management'), 'url' => '#'],
+        ['label' => Yii::t('backend', 'Home'), 'url' => ['/site/index']],
+        // ['label' => Yii::t('backend', 'Management'), 'url' => '#'],
+        ['label' => Yii::t('backend', 'Workshops'), 'items' => [
+          ['label' => 'Create Form', 'url' => '#'],
+          ['label' => 'Uploads', 'url' => '#'],
+          ['label' => 'Dependent Dropdown', 'url' => '#'],
+          ['label' => 'Relations', 'url' => '#'],
+          ['label' => 'PJax', 'url' => '#'],
+          ['label' => 'Filter & Sort in GirdView', 'url' => '#'],
+          ['label' => 'One From Multiple Model', 'url' => '#'],
+          ['label' => 'Collecting tabular input (Multiple Records)', 'url' => '#'],
+        ]]
     ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => Yii::t('common', 'Home'), 'url' => ['/site/login']];
     } else {
-        $menuItems[] = [
-            'label' => Yii::t('common', 'Logout ({username})',['username'=>Yii::$app->user->identity->username]),
-            'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
-        ];
+      $menuItems[] = [
+        'label' => Yii::t('common', 'Account ({username})',['username'=>Yii::$app->user->identity->username]),
+        'items'=>[
+            ['label' => Yii::t('common', 'Settings'), 'url' => ['/profile/index']],
+            [
+               'label' => Yii::t('common', 'Logout ({username})',['username'=>Yii::$app->user->identity->username]),
+               'url' => ['/site/logout'],
+               'linkOptions' => ['data-method' => 'post']
+           ]
+        ]
+      ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
